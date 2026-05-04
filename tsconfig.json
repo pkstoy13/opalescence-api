@@ -42,5 +42,9 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "NodeNext"
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   }
 }

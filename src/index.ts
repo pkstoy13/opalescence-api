@@ -3,17 +3,22 @@ import express, {
   type Response,
   type Application,
 } from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import { uptime } from "node:process";
 
-//const express = require("express");
+dotenv.config();
+connectDB();
+
 const app: Application = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Define a basic route
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+// Health Check
+app.get("/health", (req: Request, res: Response) => {
+  res.status(200).json({ status: "OK", uptime: process.uptime() });
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`App listening at http://localhost:${PORT}`);
 });
